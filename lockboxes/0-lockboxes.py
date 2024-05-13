@@ -17,4 +17,4 @@ def canUnlockAll(boxes):
                 opened_boxes.add(key)
                 stack.append(key)
 
-    return len(opened_boxes) == len(boxes)            
+    return len(opened_boxes) == len(boxes)           
