@@ -18,5 +18,5 @@ def canUnlockAll(boxes):
                 """ Ajouter la boîte ouverte à la pile """
                 stack.append(key)
                 """ attention à l'indentation du return"""
-    return len(opened_boxes) == len(boxes)
+    return len(opened_boxes)==len(boxes)
             
