@@ -13,10 +13,8 @@ def canUnlockAll(boxes):
     while stack:
         current_box = stack.pop()
         for key in boxes[current_box]:
-            if key not in opened_boxes:
+            if 0 <= key < len(boxes) and key not in opened_boxes:
                 opened_boxes.add(key)
-                """ Ajouter la boîte ouverte à la pile """
                 stack.append(key)
-                """ attention à l'indentation du return"""
-    return len(opened_boxes)==len(boxes)
-            
+
+    return len(opened_boxes) == len(boxes)            
