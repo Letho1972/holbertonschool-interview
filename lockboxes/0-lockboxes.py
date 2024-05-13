@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Write a method that determines if all the boxes can be opened."""
 
+
 def canUnlockAll(boxes):
     """ Ensemble pour stocker les boîtes déjà ouvertes"""
     opened_boxes = set()
@@ -14,7 +15,7 @@ def canUnlockAll(boxes):
         for key in boxes[current_box]:
             if key not in opened_boxes:
                 opened_boxes.add(key)
-                """ Ajouter la boîte ouverte à la pile pour exploration ultérieure"""
+                """ Ajouter la boîte ouverte à la pile """
                 stack.append(key)
                 """ attention à l'indentation du return"""
     return len(opened_boxes) == len(boxes)
