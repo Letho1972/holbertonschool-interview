@@ -31,11 +31,11 @@ int is_palindrome(listint_t **head)
 
 int is_palindrome_util(listint_t **left, listint_t *right)
 {
+	int is_pal;
+
 	if (right == NULL)
 		return (1);
 
-
-int is_pal;
 
 if (right == NULL)
 	{
