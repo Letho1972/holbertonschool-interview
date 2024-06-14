@@ -33,13 +33,7 @@ int is_palindrome_util(listint_t **left, listint_t *right)
 {
 	if (right == NULL)
 		return (1);
-	/**
-	 * is_palindrome_util - utility function to check if linked list is palindrome
-	 * @left: pointer to left node in the list
-	 * @right: pointer to right node in the list
-	 *
-	 * Return: 1 if the list is a palindrome, and 0 otherwise
-	 */
+
 
 int is_pal;
 
