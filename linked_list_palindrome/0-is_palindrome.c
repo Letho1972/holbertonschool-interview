@@ -4,19 +4,12 @@
 #include "lists.h"
 
 /**
- * struct listint_s - singly linked list
- * @n: integer
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- */
-
-/**
  * is_palindrome - checks if a singly linked list is a palindrome
  * @head: pointer to the head of the list
  *
  * Return: 1 if the list is a palindrome, and 0 otherwise
  */
+
 
 
 int is_palindrome(listint_t **head)
@@ -40,20 +33,24 @@ int is_palindrome_util(listint_t **left, listint_t *right)
 {
 	if (right == NULL)
 		return (1);
-/**
- * is_palindrome_util - utility function to check if linked list is palindrome
- * @left: pointer to left node in the list
- * @right: pointer to right node in the list
- *
- * Return: 1 if the list is a palindrome, and 0 otherwise
- */
+	/**
+	 * is_palindrome_util - utility function to check if linked list is palindrome
+	 * @left: pointer to left node in the list
+	 * @right: pointer to right node in the list
+	 *
+	 * Return: 1 if the list is a palindrome, and 0 otherwise
+	 */
 
-	int is_pal = is_palindrome_util(left, right->next)
-	&& ((*left)->n == right->n);
+int is_pal;
+
+if (right == NULL)
+	{
+	return (1);
+	}
+
+	is_pal = is_palindrome_util(left, right->next) && ((*left)->n == right->n);
 
 	*left = (*left)->next;
 
 	return (is_pal);
 }
-
-
