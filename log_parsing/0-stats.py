@@ -32,7 +32,7 @@ try:
 
         total_file_size += file_size
         status_codes[status_code] += 1
-#Checks if the line has fewer than 5 parts, and skips it if true.
+# Checks if the line has fewer than 5 parts, and skips it if true.
         if line_count % 10 == 0 or line_count == 1:
             print(f"File size: {total_file_size}")
             for code in sorted(status_codes):
