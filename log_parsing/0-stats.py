@@ -1,47 +1,48 @@
 #!/usr/bin/python3
-"""
-A script that reads stdin line by line and computes metrics
-"""
+""" script that reads stdin line by line and computes metrics """
 
-import sys
-from collections import defaultdict
+if __name__ == '__main__':
 
+    import sys
 
-# Tracks the cumulative size of the files
-total_file_size = 0
+    def print_results(statusCodes, fileSize):
+        """ Print statistics """
+        print("File size: {:d}".format(fileSize))
+        for statusCode, times in sorted(statusCodes.items()):
+            if times:
+                print("{:s}: {:d}".format(statusCode, times))
 
-# Stores the counts of different HTTP status codes
-status_codes = defaultdict(int)
+    statusCodes = {"200": 0,
+                   "301": 0,
+                   "400": 0,
+                   "401": 0,
+                   "403": 0,
+                   "404": 0,
+                   "405": 0,
+                   "500": 0
+                   }
+    fileSize = 0
+    n_lines = 0
 
-# Counts the number of processed lines
-line_count = 0
-
-# The main loop reads lines from the standard input
-try:
-    for line in sys.stdin:
-        line_count += 1
-        parts = line.strip().split()
-        if len(parts) < 5:
-            continue
-# Increments the line count.
-        try:
-            file_size = int(parts[-1])
-            status_code = int(parts[-2])
-        except ValueError:
-            continue
-
-        total_file_size += file_size
-        status_codes[status_code] += 1
-# Checks if the line has fewer than 5 parts, and skips it if true.
-        if line_count % 10 == 0 or line_count == 1:
-            print(f"File size: {total_file_size}")
-            for code in sorted(status_codes):
-                if status_codes[code] > 0:
-                    print(f"{code}: {status_codes[code]}")
-# Handles the user interrupt (Ctrl+C).
-except KeyboardInterrupt:
-    print(f"File size: {total_file_size}")
-    for code in sorted(status_codes):
-        if status_codes[code] > 0:
-            print(f"{code}: {status_codes[code]}")
-    sys.exit(0)
+    try:
+        """ Read stdin line by line """
+        for line in sys.stdin:
+            if n_lines != 0 and n_lines % 10 == 0:
+                """ After every 10 lines, print from the beginning """
+                print_results(statusCodes, fileSize)
+            n_lines += 1
+            data = line.split()
+            if len(data) >= 2:
+                try:
+                    """ Compute metrics """
+                    statusCode = data[-2]
+                    if statusCode in statusCodes:
+                        statusCodes[statusCode] += 1
+                    fileSize += int(data[-1])
+                except (IndexError, ValueError):
+                    continue
+        print_results(statusCodes, fileSize)
+    except KeyboardInterrupt:
+        """ Keyboard interruption, print from the beginning """
+        print_results(statusCodes, fileSize)
+        raise
