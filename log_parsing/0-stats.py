@@ -1,23 +1,22 @@
 #!/usr/bin/python3
 """
-a script that reads stdin line by line and computes metrics
-sys: provides access to some variables
-defaultdict from collections: that returns a default value
-if the requested key is not found
+A script that reads stdin line by line and computes metrics
 """
 
 import sys
 from collections import defaultdict
-"""
-Tracks the cumulative size of the files
-Stores the counts of different HTTP status codes
-Counts the number of processed lines
-"""
+
+
+# Tracks the cumulative size of the files
 total_file_size = 0
+
+# Stores the counts of different HTTP status codes
 status_codes = defaultdict(int)
 
+# Counts the number of processed lines
 line_count = 0
-""" The main loop reads lines from the standard input """
+
+# The main loop reads lines from the standard input
 try:
     for line in sys.stdin:
         line_count += 1
