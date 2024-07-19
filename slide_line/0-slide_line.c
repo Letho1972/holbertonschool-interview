@@ -54,13 +54,15 @@ int slide_line(int *line, size_t size, int direction)
 static void slide_left(int *line, size_t size)
 {
 	size_t pos = 0;
+	size_t i = 0;
 
-	for (size_t i = 0; i < size; i++)
+	while (i < size)
 	{
 		if (line[i] != 0)
 		{
 			line[pos++] = line[i];
 		}
+		i++;
 	}
 	while (pos < size)
 	{
@@ -75,13 +77,15 @@ static void slide_left(int *line, size_t size)
 static void slide_right(int *line, size_t size)
 {
 	size_t pos = size - 1;
+	int i = size - 1;
 
-	for (int i = size - 1; i >= 0; i--)
+	while (i >= 0)
 	{
 		if (line[i] != 0)
 		{
 			line[pos--] = line[i];
 		}
+		i--;
 	}
 	while (pos != SIZE_MAX)
 	{
@@ -95,13 +99,16 @@ static void slide_right(int *line, size_t size)
  */
 static void merge_left(int *line, size_t size)
 {
-	for (size_t i = 0; i < size - 1; i++)
+	size_t i = 0;
+
+	while (i < size - 1)
 	{
 		if (line[i] == line[i + 1] && line[i] != 0)
 		{
 			line[i] *= 2;
 			line[i + 1] = 0;
 		}
+		i++;
 	}
 }
 /**
@@ -111,12 +118,15 @@ static void merge_left(int *line, size_t size)
  */
 static void merge_right(int *line, size_t size)
 {
-	for (size_t i = size - 1; i > 0; i--)
+	size_t i = size - 1;
+
+	while (i > 0)
 	{
 		if (line[i] == line[i - 1] && line[i] != 0)
 		{
 			line[i] *= 2;
 			line[i - 1] = 0;
 		}
+		i--;
 	}
 }
