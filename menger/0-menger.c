@@ -23,27 +23,35 @@ void draw_sponge(int level, int x, int y, int size)
 	}
 
 	int new_size = size / 3;
+	int i = 0;
 
-	for (int i = 0; i < 3; i++)
+	while (i < 3)
 	{
-		for (int j = 0; j < 3; j++)
+		int j = 0;
+
+		while (j < 3)
 		{
 			if (i == 1 && j == 1)
 			{
-				for (int k = 0; k < new_size; k++)
+				int k = 0;
+
+				while (k < new_size)
 				{
 					putchar(' ');
+					k++;
 				}
 			}
 			else
 			{
 				draw_sponge(level - 1, x + i * new_size, y + j * new_size, new_size);
 			}
+			j++;
 		}
 		if (i < 2)
 		{
 			putchar('\n');
 		}
+		i++;
 	}
 }
 
