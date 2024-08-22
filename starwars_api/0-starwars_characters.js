@@ -2,48 +2,40 @@
 
 const request = require('request');
 
-// Vérifier si l'utilisateur a fourni un ID de film
-if (process.argv.length !== 3) {
-    console.error('Usage: node script.js <Movie ID>');
-    process.exit(1);
-}
-
-// Récupérer l'ID du film à partir des arguments de la ligne de commande
-const movieId = process.argv[2];
-
-// Construire l'URL de l'API pour obtenir les informations du film
-const url = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
-
-// Faire une requête GET à l'API pour récupérer les informations du film
-request(url, { json: true }, (error, response, body) => {
-    if (error) {
-        console.error('Erreur lors de la requête:', error);
-        return;
-    }
-
-    if (response.statusCode !== 200) {
-        console.error('Impossible de récupérer les informations du film:', response.statusCode);
-        return;
-    }
-
-    // Extraire la liste des personnages
-    const characters = body.characters;
-
-    // Faire une requête GET pour chaque personnage
-    characters.forEach(characterUrl => {
-        request(characterUrl, { json: true }, (error, response, body) => {
+function fetchCharacter(characterUrl) {
+    return new Promise((resolve, reject) => {
+        request(characterUrl, function (error, response, body) {
             if (error) {
-                console.error('Erreur lors de la requête:', error);
-                return;
+                return reject(error);
             }
-
-            if (response.statusCode !== 200) {
-                console.error('Impossible de récupérer les informations du personnage:', response.statusCode);
-                return;
-            }
-
-            // Afficher le nom du personnage
-            console.log(body.name);
+            const character = JSON.parse(body);
+            resolve(character.name);
         });
     });
-});
+}
+
+async function fetchCharactersInOrder(movieId) {
+    const url = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
+
+    request(url, async function (error, response, body) {
+        if (error) {
+            console.error('Error:', error);
+            return;
+        }
+
+        const film = JSON.parse(body);
+        const characters = film.characters;
+
+        for (let i = 0; i < characters.length; i++) {
+            try {
+                const characterName = await fetchCharacter(characters[i]);
+                console.log(characterName);
+            } catch (error) {
+                console.error('Error fetching character:', error);
+            }
+        }
+    });
+}
+
+const movieId = process.argv[2];
+fetchCharactersInOrder(movieId);
