@@ -1,6 +1,14 @@
 #!/usr/bin/python3
-
+"""
+Units of water
+"""
 def rain(walls):
+
+    """
+    calculate how many square units of water
+    will be retained after it rains.
+    """
+
     # Si la liste est vide, il n'y a pas d'eau à retenir, donc on retourne 0
     if not walls:
         return 0
