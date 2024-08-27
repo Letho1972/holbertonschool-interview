@@ -23,7 +23,7 @@ def rain(walls):
             left += 1
             # Mettre à jour la hauteur max à gauche
             left_max = max(left_max, walls[left])
-            # Calculer l'eau retenue à la position actuelle et l'ajouter au total
+            # Calculer l'eau retenue à la position actuelle et ajouter au total
             water_trapped += max(0, left_max - walls[left])
         else:
             # Si la hauteur max à droite est inférieure à celle à gauche
@@ -31,7 +31,7 @@ def rain(walls):
             right -= 1
             # Mettre à jour la hauteur max à droite
             right_max = max(right_max, walls[right])
-            # Calculer l'eau retenue à la position actuelle et l'ajouter au total
+            # Calculer l'eau retenue à la position actuelle et ajouter au total
             water_trapped += max(0, right_max - walls[right])
 
     # Retourner la quantité totale d'eau retenue
