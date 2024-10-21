@@ -11,6 +11,9 @@ def makeChange(coins, total):
     if total == 0:
         return 0
 
+    if total < 0:
+        return -1
+
     # Initialize dp array a large number (infini), except dp[0] which is 0
     dp = [float('inf')] * (total + 1)
     dp[0] = 0
