@@ -12,7 +12,7 @@ The perimeter of the island is defined as the total length of its boundary.
 
 
 def island_perimeter(grid):
-    """Function that calculates the perimeter of an island in a grid."""
+    """Calculate the perimeter of an island in a grid."""
     result = 0
     for i in range(len(grid)):  # Iterate through each row of the grid
         for j in range(len(grid[i])):  # Iterate through each column
