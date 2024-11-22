@@ -7,17 +7,18 @@
  * @parent: pointer to the parent node of the node to create
  * @value: the value to put in the new node
  * Return: binary tree
- */
+*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
-    binary_tree_t *tmp = (binary_tree_t *)malloc(sizeof(binary_tree_t));
-    if (tmp == NULL)
-        return (NULL);
+	binary_tree_t *tmp = (binary_tree_t *)malloc(sizeof(binary_tree_t));
 
-    tmp->n = value;
-    tmp->left = tmp->right = NULL;
-    tmp->parent = parent;
-    return (tmp);
+if (tmp == NULL)
+		return (NULL);
+
+	tmp->n = value;
+	tmp->left = tmp->right = NULL;
+	tmp->parent = parent;
+	return (tmp);
 }
 /**
  * height - Measures the height of a binary tree
@@ -42,18 +43,19 @@ size_t height(const binary_tree_t *tree)
 
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    int h_l = 0, h_r = 0, diff = 0;
-    if(!tree)
-            return (1);
-    if (tree->left && tree->right)
-    {
-        h_l = height(tree->left);
-        h_r = height(tree->right);
-        diff = h_l > h_r ? h_l - h_r : h_r - h_l;
-    }
 
-    if(diff < 1)
-        return (binary_tree_is_avl(tree->left) & binary_tree_is_avl(tree->right));
+int h_l = 0, h_r = 0, diff = 0;
+	if (!tree)
+		return (1);
+	if (tree->left && tree->right)
+	{
+		h_l = height(tree->left);
+		h_r = height(tree->right);
+		diff = h_l > h_r ? h_l - h_r : h_r - h_l;
+	}
 
-    return 0;
+	if (diff < 1)
+		return (binary_tree_is_avl(tree->left) & binary_tree_is_avl(tree->right));
+
+	    return (0);
 }
