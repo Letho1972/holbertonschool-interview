@@ -11,7 +11,7 @@
 int regex_match(const char *str, const char *pattern);
 
 int regex_match(const char *str, const char *pattern)
-/*function regex_match*/
+/*function regex_match */
 {
 	/*Base case: if the pattern is empty,the string be empty */
 	if (*pattern == '\0')

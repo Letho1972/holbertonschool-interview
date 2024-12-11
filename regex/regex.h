@@ -2,7 +2,7 @@
 #define REGEX_H
 
 
-/* FUNCTION PROTOTYPE */
+/* FUNCTION PROTOTYPE RegEx */
 int regex_match(char const *str, char const *pattern);
 
 
